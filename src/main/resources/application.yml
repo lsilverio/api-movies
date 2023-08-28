@@ -16,4 +16,3 @@ management:
     jmx:
       exposure:
         include: "health"
-
