@@ -17,7 +17,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas na s
 
 1. Abra o terminal ou prompt de comando no seu computador.
 
-2. Clone este repositório para a sua máquina local usando o seguinte comando:
+2. Baixe o projeto para sua máquina clicando [aqui](https://github.com/lsilverio/api-leitura-filmes/archive/refs/heads/master.zip) ou clone este repositório para a sua máquina local usando o seguinte comando:
 
 
     git clone https://github.com/lsilverio/api-leitura-filmes.git
