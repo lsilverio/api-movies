@@ -8,6 +8,7 @@ da categoria Pior Filme do Golden Raspberry Awards.
 - Java JDK 17
 - Maven 3.9.3
 - Git
+- Postman (Opicional)
 
 ## Configuração
 
@@ -23,9 +24,11 @@ A aplicação será iniciada e estará disponível em http://localhost:8080.
 
 1. Certifique-se de que a aplicação esteja em execução.
 
-2. Acesse a API através do navegador ou de uma ferramenta como o [Swagger](http://localhost:8080/swagger-ui.html), onde você encontrará a documentação detalhada dos endpoints.
+2. Acesse a API através do [Swagger](http://localhost:8080/swagger-ui.html), onde você encontrará a documentação detalhada dos endpoints.
 
 3. Experimente os endpoints disponíveis para obter os resultados desejados.
+
+4. É possível utilizar o Postman para efeturar a requisição, abaixo detalhes: 
 
 O endpoint disponível na API é:
 
