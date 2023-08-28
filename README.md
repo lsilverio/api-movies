@@ -35,6 +35,13 @@ O endpoint disponível na API é:
 
 ![Exemplo de Requisição no Postman](https://github.com/lsilverio/api-leitura-filmes/blob/master/src/main/resources/static/img/teste_postman.png)
 
+## Para acessar o banco de dados
+
+1. Após a inicialização da aplicação, acesse a url: http://localhost:8080/h2-console
+2. Para se conectar não é necessário a senha
+
+![Exemplo conexão h2-console](https://github.com/lsilverio/api-leitura-filmes/blob/master/src/main/resources/static/img/connect_h2_console.png)
+
 ## Testes de Integração
 
 Para executar os testes de integração, execute o seguinte comando: `mvn test`
