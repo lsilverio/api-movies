@@ -27,16 +27,37 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas na s
 
     cd api-leitura-filmes
 
-4. Execute a aplicação usando o Maven:
+### Configuração do arquivo csv
+
+Caso você queira alterar os dados do arquivo CSV utilizado pela aplicação, siga as instruções abaixo:
+
+1. Dentro do projeto localize o arquivo CSV no diretório `\src\main\resources\movie`.
+
+2. Obrigatório manter o cabeçalho e a estrutura do arquivo CSV com o seguinte formato:
+
+
+    year;title;studios;producers;winner
+
+3. Certifique-se de manter o separador `;` e as colunas `year`, `title`, `studios`, `producers` e `winner` na ordem indicada.
+
+4. Após fazer as alterações desejadas, salve o arquivo. Ao iniciar a aplicação, os novos dados do arquivo CSV serão carregados automaticamente.
+
+
+## Rodando a aplicação
+
+1. Navegue até o diretório do projeto:
+
+
+    cd api-leitura-filmes
+
+2. Execute a aplicação usando o Maven e a mesma será iniciada. Você poderá acessá-la em: [localhost](http://localhost:8080/actuator/health)
 
 
     mvn spring-boot:run
 
-A aplicação será iniciada e você poderá acessá-la em: [localhost](http://localhost:8080/actuator/health)
-
-## Rodando a Aplicação via Docker (Opcional)
-
 Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
+
+### Via Docker (Opcional)
 
 1. Certifique-se de ter o Docker instalado na sua máquina. Se ainda não tiver, você pode baixá-lo [aqui](https://www.docker.com/get-started).
 
@@ -52,7 +73,7 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
     
     docker build -t teste-backend-image .
 
-5. Após a conclusão do processo de construção da imagem, você pode iniciar a aplicação dentro de um contêiner Docker com o seguinte comando:
+5. Após a conclusão do processo de construção da imagem, execute o comando:
 
 
     docker-compose up
@@ -91,20 +112,6 @@ Para executar os testes de integração, execute o seguinte comando:
     mvn test
 
 
-## Configuração dos Dados
-
-Caso você queira alterar os dados do arquivo CSV utilizado pela aplicação, siga as instruções abaixo:
-
-1. Localize o arquivo CSV no diretório `\src\main\resources\movie`.
-
-2. Mantenha o cabeçalho e a estrutura do arquivo CSV com o seguinte formato:
-
-
-    year;title;studios;producers;winner
-
-Certifique-se de manter o separador `;` e as colunas `year`, `title`, `studios`, `producers` e `winner` na ordem indicada.
-
-3. Após fazer as alterações desejadas, salve o arquivo. Ao iniciar a aplicação, os novos dados do arquivo CSV serão carregados automaticamente.
 
 ## Tecnologias Utilizadas
 
