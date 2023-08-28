@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -32,7 +33,7 @@ public class MovieServiceTest {
     @Test
     public void testCalculateIntervals() {
 
-        when(movieRepository.findAllByWinnerTrue()).thenReturn(buildListMovie());
+        when(movieRepository.findAllByWinnerTrue()).thenReturn(buildMoviesWinnerTrue());
         ResponseDto result = movieService.calculateIntervals();
 
         assertEquals(2, result.getMin().size());
@@ -47,7 +48,7 @@ public class MovieServiceTest {
         });
     }
 
-    private List<Movie> buildListMovie() {
+    private List<Movie> buildMoviesWinnerTrue() {
         List<Movie> mockMovies = new ArrayList<>();
         mockMovies.add(Movie.builder().yearMovie(1995).title("Movie X").studios("Studios A").producers("Producer 1").winner(true).build());
         mockMovies.add(Movie.builder().yearMovie(2000).title("Movie Z").studios("Studios C").producers("Producer 1").winner(true).build());
@@ -62,7 +63,7 @@ public class MovieServiceTest {
         mockMovies.add(Movie.builder().yearMovie(2015).title("Movie S").studios("Studios G").producers("Producer 4").winner(true).build());
         mockMovies.add(Movie.builder().yearMovie(2014).title("Movie S").studios("Studios G").producers("Producer 5").winner(true).build());
         mockMovies.add(Movie.builder().yearMovie(2015).title("Movie S").studios("Studios G").producers("Producer 5").winner(true).build());
-        return mockMovies;
+        return mockMovies.stream().filter(Movie::isWinner).collect(Collectors.toList());
     }
 
 }
