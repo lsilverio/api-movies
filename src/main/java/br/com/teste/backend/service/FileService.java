@@ -4,6 +4,7 @@ import br.com.teste.backend.entity.Movie;
 import br.com.teste.backend.exception.FileCsvNotFoundException;
 import br.com.teste.backend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class FileService {
 
-    private static final String DIRECTORY_FILE = "classpath:movie/movielist.csv";
+    private static final String CSV_FILE_PATH = "movie/movielist.csv";
     private final MovieRepository movieRepository;
     private final ResourceLoader resourceLoader;
 
@@ -30,37 +32,32 @@ public class FileService {
     }
 
     public void loadDataFromCSV() throws IOException {
-        File csvFile = getCsvFile();
-        List<String[]> csvData = readCsvData(csvFile);
+        List<String[]> csvData = readCsvData();
         List<Movie> movies = buildMovies(csvData);
         saveMoviesToRepository(movies);
     }
 
     private File getCsvFile() throws IOException {
-        Resource resource = resourceLoader.getResource(DIRECTORY_FILE);
+        Resource resource = resourceLoader.getResource(CSV_FILE_PATH);
 
         if (!resource.exists()) {
-            throw new FileCsvNotFoundException("File csv not found: " + DIRECTORY_FILE);
+            throw new FileCsvNotFoundException("File csv not found: " + CSV_FILE_PATH);
         }
 
         return resource.getFile();
     }
 
-    private List<String[]> readCsvData(File csvFile) throws IOException {
-        List<String[]> csvData = new ArrayList<>();
+    private List<String[]> readCsvData() throws IOException {
+        Resource resource = new ClassPathResource(CSV_FILE_PATH);
 
-        try (BufferedReader br = Files.newBufferedReader(csvFile.toPath())) {
-            // Descarta o cabeçalho do conteúdo do arquivo
-            br.readLine();
-
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] fields = line.split(";");
-                csvData.add(fields);
-            }
+        if (!resource.exists()) {
+            throw new FileCsvNotFoundException("File csv not found: " + CSV_FILE_PATH);
         }
 
-        return csvData;
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+            br.readLine(); // Primeira linha do conteúdo é cabeçalho
+            return br.lines().map(line -> line.split(";")).collect(Collectors.toList());
+        }
     }
 
     private List<Movie> buildMovies(List<String[]> csvData) {
