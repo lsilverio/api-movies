@@ -18,17 +18,17 @@ da categoria Pior Filme do Golden Raspberry Awards.
 
 3. Execute a aplicação usando o Maven: `mvn spring-boot:run`
 
-A aplicação será iniciada e estará disponível em http://localhost:8080.
+A aplicação será iniciada e poderá ser acessada em: [localhost](http://localhost:8080/actuator/health)
 
 ## Uso
 
 1. Certifique-se de que a aplicação esteja em execução.
 
-2. Acesse a API através do [Swagger](http://localhost:8080/swagger-ui.html), onde você encontrará a documentação detalhada dos endpoints.
+2. Acesse a página do [Swagger](http://localhost:8080/swagger-ui.html), onde você encontrará a documentação detalhada dos endpoints.
 
 3. Experimente os endpoints disponíveis para obter os resultados desejados.
 
-4. É possível utilizar o Postman para efeturar a requisição, abaixo detalhes: 
+4. É possível também utilizar o Postman para efeturar as requisições, conforme abaixo: 
 
 O endpoint disponível na API é:
 
@@ -66,6 +66,7 @@ Após fazer as alterações desejadas, salve o arquivo. Ao iniciar a aplicação
 ## Tecnologias Utilizadas
 
 - Spring Boot
+- Spring Boot Actuator
 - Spring Data JPA
 - H2 Database
 - Springdoc OpenAPI
