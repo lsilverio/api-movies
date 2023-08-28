@@ -50,7 +50,7 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 4. Depois de gerar o JAR, execute o comando a seguir para construir a imagem Docker:
 
     
-    docker build -t teste-backend .
+    docker build -t teste-backend-image .
 
 5. Após a conclusão do processo de construção da imagem, você pode iniciar a aplicação dentro de um contêiner Docker com o seguinte comando:
 
