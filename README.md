@@ -65,8 +65,10 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 
 3. Execute o seguinte comando para gerar o JAR da aplicação (caso ainda não tenha gerado):
 
-    
+
     mvn clean package
+
+
 
 4. Depois de gerar o JAR, execute o comando a seguir para construir a imagem Docker:
 
