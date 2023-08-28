@@ -7,8 +7,8 @@ da categoria Pior Filme do Golden Raspberry Awards.
 
 Antes de começar, certifique-se de ter as seguintes ferramentas instaladas na sua máquina:
 
-- **Java JDK 17**: Você pode baixá-lo [aqui](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
-- **Maven 3.9.3 (Opcional)**: Você pode baixá-lo [aqui](https://maven.apache.org/download.cgi), mas é opcional caso queira compilar manualmente o projeto.
+- **Java JDK 17**: Você pode baixá-lo [aqui](https://www.oracle.com/br/java/technologies/downloads/#java17).
+- **Maven 3.9.3 (Opcional)**: Você pode baixá-lo [aqui](https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.zip), mas é opcional caso queira compilar manualmente o projeto.
 - **Docker (Opcional)**: Caso queira rodar a aplicação via Docker, você pode baixá-lo [aqui](https://www.docker.com/get-started).
 - **Git (Opcional)**: Caso não queira ter o Git instalado, basta fazer o download do projeto [aqui](https://github.com/lsilverio/api-leitura-filmes/archive/refs/heads/master.zip).
 - **Postman (Opcional)**: Para testar as requisições da API, você pode baixá-lo [aqui](https://www.postman.com/downloads/).
