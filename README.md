@@ -55,7 +55,7 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 5. Após a conclusão do processo de construção da imagem, você pode iniciar a aplicação dentro de um contêiner Docker com o seguinte comando:
 
 
-    docker run -p 8080:8080 teste-backend
+    docker-compose up
 
 6. A aplicação estará rodando dentro do contêiner Docker. Você poderá acessá-la em: [localhost](http://localhost:8080/actuator/health)
 
