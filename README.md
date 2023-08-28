@@ -116,7 +116,7 @@ Para executar os testes de integração, execute o seguinte comando:
 ## Tecnologias Utilizadas
 
 - Spring Boot
-- Spring Boot Actuator
+- Actuator
 - Spring Data JPA
 - H2 Database
 - Springdoc OpenAPI
