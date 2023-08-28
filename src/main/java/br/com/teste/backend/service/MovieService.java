@@ -87,6 +87,6 @@ public class MovieService {
 
 	private static Map<String, List<Movie>> groupMoviesByProducer(List<Movie> movies) {
 		movies.sort(Comparator.comparing(Movie::getProducers));
-		return movies.stream().filter(Movie::isWinner).collect(Collectors.groupingBy(Movie::getProducers));
+		return movies.stream().collect(Collectors.groupingBy(Movie::getProducers));
 	}
 }
