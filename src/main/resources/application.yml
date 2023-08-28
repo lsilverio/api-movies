@@ -10,3 +10,10 @@ spring:
     console:
       enabled: true
       path: /h2-console
+
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: "health"
+
