@@ -28,7 +28,7 @@ public class MovieControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ObjectMapper mapper;
+    private ObjectMapper objectMapper;
 
     @MockBean
     private MovieService movieService;
@@ -52,16 +52,15 @@ public class MovieControllerTest {
                 .andReturn();
 
         String contentAsString = result.getResponse().getContentAsString();
-        ResponseDto responseDto = new ObjectMapper().readValue(contentAsString, ResponseDto.class);
+        ResponseDto responseDto = objectMapper.readValue(contentAsString, ResponseDto.class);
         assertNotNull(responseDto);
         assertNotNull(responseDto.getMin());
         assertNotNull(responseDto.getMax());
         verify(movieService, times(1)).calculateIntervals();
     }
 
-    private static ResponseDto getResponseDto() throws JsonProcessingException {
+    private ResponseDto getResponseDto() throws JsonProcessingException {
         String json = "{\"min\":[{\"producer\":\"Producer 1\",\"interval\":6,\"previousWin\":1995,\"followingWin\":2001}],\"max\":[{\"producer\":\"Producer 1\",\"interval\":14,\"previousWin\":2001,\"followingWin\":2015}]}";
-        ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(json, ResponseDto.class);
     }
 
