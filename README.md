@@ -13,7 +13,7 @@ da categoria Pior Filme do Golden Raspberry Awards.
 
 1. Clone este repositório para a sua máquina local usando o comando: `git clone https://github.com/lsilverio/api-leitura-filmes.git`
 
-2. Navegue até o diretório do projeto: `cd api-leitura-filmes`
+2. Navegue até o diretório do projeto, ex: `cd api-leitura-filmes`
 
 3. Execute a aplicação usando o Maven: `mvn spring-boot:run`
 
@@ -33,7 +33,7 @@ O endpoint disponível na API é:
 - URL: http://localhost:8080/movies/prizes
 - Descrição: Retorna o produtor com maior intervalo entre dois prêmios consecutivos e o produtor que obteve dois prêmios mais rápido.
 
-![Exemplo de Requisição no Postman](\src\main\resources\static\img\teste_postman.png)
+![Exemplo de Requisição no Postman](https://github.com/lsilverio/api-leitura-filmes/blob/master/src/main/resources/static/img/teste_postman.png)
 
 ## Testes de Integração
 
