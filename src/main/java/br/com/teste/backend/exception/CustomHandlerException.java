@@ -14,6 +14,13 @@ import java.io.IOException;
 @ControllerAdvice
 public class CustomHandlerException extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponseDto> handle(Exception exception, WebRequest request) {
+        String complementMessage = "An unexpected failure occurred, please contact the administrator: ";
+        ErrorResponseDto response = new ErrorResponseDto(HttpStatus.BAD_REQUEST, complementMessage + exception.getMessage());
+        return new ResponseEntity<ErrorResponseDto>(response, new HttpHeaders(), response.getStatus());
+    }
+
     @ExceptionHandler(IOException.class)
     public ResponseEntity<ErrorResponseDto> handleIOException(IOException exception, WebRequest request) {
         String complementMessage = "Failed to read the contents of the file: ";
