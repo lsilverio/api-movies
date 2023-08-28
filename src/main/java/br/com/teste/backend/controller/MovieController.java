@@ -6,14 +6,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -32,10 +30,7 @@ public class MovieController {
             content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ResponseDto.class))})
     @GetMapping(value = "/prizes")
     public ResponseEntity<ResponseDto> calculateIntervals() {
-        log.info("Starting calculateIntervals");
-        ResponseDto responseDto = movieService.calculateIntervals();
-        log.info("Finishing calculateIntervals");
-        return ResponseEntity.ok(responseDto);
+        return ResponseEntity.ok(movieService.calculateIntervals());
     }
 
 }
