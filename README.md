@@ -1,4 +1,4 @@
-# Teste Backend
+# API Movies
 
 API RESTful que possibilita a leitura da lista de indicados e vencedores
 da categoria Pior Filme do Golden Raspberry Awards.
@@ -10,22 +10,22 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas na s
 - **Java JDK 17**: Você pode baixá-lo [aqui](https://www.oracle.com/br/java/technologies/downloads/#java17).
 - **Maven (Opcional)**: Você pode baixá-lo [aqui](https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.zip), mas é opcional caso queira compilar manualmente o projeto.
 - **Docker (Opcional)**: Caso queira rodar a aplicação via Docker, você pode baixá-lo [aqui](https://www.docker.com/get-started).
-- **Git (Opcional)**: Caso não queira ter o Git instalado, basta fazer o download do projeto [aqui](https://github.com/lsilverio/api-leitura-filmes/archive/refs/heads/master.zip).
+- **Git (Opcional)**: Caso não queira ter o Git instalado, basta fazer o download do projeto [aqui](https://github.com/lsilverio/api-movies/archive/refs/heads/master.zip).
 - **Postman (Opcional)**: Para testar as requisições da API, você pode baixá-lo [aqui](https://www.postman.com/downloads/).
 
 ## Configuração
 
 1. Abra o terminal ou prompt de comando no seu computador.
 
-2. Baixe o projeto para sua máquina clicando [aqui](https://github.com/lsilverio/api-leitura-filmes/archive/refs/heads/master.zip) ou clone este repositório para a sua máquina local usando o seguinte comando:
+2. Baixe o projeto para sua máquina clicando [aqui](https://github.com/lsilverio/api-movies/archive/refs/heads/master.zip) ou clone este repositório para a sua máquina local usando o seguinte comando:
 
 
-    git clone https://github.com/lsilverio/api-leitura-filmes.git
+    git clone https://github.com/lsilverio/api-movies.git
 
 3. Navegue até o diretório do projeto:
 
 
-    cd api-leitura-filmes
+    cd api-movies
 
 ### Configuração do arquivo csv
 
@@ -48,7 +48,7 @@ Caso você queira alterar os dados do arquivo CSV utilizado pela aplicação, si
 1. Navegue até o diretório do projeto:
 
 
-    cd api-leitura-filmes
+    cd api-movies
 
 2. Execute a aplicação usando o Maven e a mesma será iniciada. Você poderá acessá-la em: [localhost](http://localhost:8080/actuator/health)
 
@@ -73,7 +73,7 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 4. Depois de gerar o JAR, execute o comando a seguir para construir a imagem Docker:
 
     
-    docker build -t teste-backend-image .
+    docker build -t api-movies-image .
 
 5. Após a conclusão do processo de construção da imagem, execute o comando:
 
@@ -96,7 +96,7 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 - URL: http://localhost:8080/movies/prizes
 - Descrição: Retorna o produtor com maior intervalo entre dois prêmios consecutivos e o produtor que obteve dois prêmios mais rápido.
 
-![Exemplo de Requisição no Postman](https://github.com/lsilverio/api-leitura-filmes/blob/master/src/main/resources/static/img/teste_postman.png)
+![Exemplo de Requisição no Postman](https://github.com/lsilverio/api-movies/blob/master/src/main/resources/static/img/teste_postman.png)
 
 ## Acessando o Banco de Dados
 
@@ -104,7 +104,7 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 
 2. Para se conectar ao banco de dados, não é necessário inserir uma senha.
 
-![Exemplo conexão h2-console](https://github.com/lsilverio/api-leitura-filmes/blob/master/src/main/resources/static/img/connect_h2_console.png)
+![Exemplo conexão h2-console](https://github.com/lsilverio/api-movies/blob/master/src/main/resources/static/img/connect_h2_console.png)
 
 ## Testes de Integração
 
