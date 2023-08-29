@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.teste.backend</groupId>
-	<artifactId>teste-back-end</artifactId>
+	<artifactId>api-movies</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>teste-back-end</name>
-	<description>Teste Backend</description>
+	<name>api-movies</name>
+	<description>API Movies</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
