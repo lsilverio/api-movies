@@ -50,7 +50,7 @@ Caso você queira alterar os dados do arquivo CSV utilizado pela aplicação, si
 
     cd api-movies
 
-2. Execute a aplicação usando o Maven e a mesma será iniciada. Você poderá acessá-la em: [localhost](http://localhost:8080/actuator/health)
+2. Execute a aplicação usando o comando abaixo e a mesma será iniciada. Você poderá acessá-la em: [localhost](http://localhost:8080/actuator/health)
 
 
     mvn spring-boot:run
@@ -104,11 +104,17 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 
 2. Para se conectar ao banco de dados, não é necessário inserir uma senha.
 
+   
+    Driver Class: org.h2.Driver
+    JDBC URL: jdbc:h2:mem:testdb
+    User name: sa
+    Password:
+
 ![Exemplo conexão h2-console](https://github.com/lsilverio/api-movies/blob/master/src/main/resources/static/img/connect_h2_console.png)
 
 ## Testes de Integração
 
-Para executar os testes de integração, execute o seguinte comando:
+Para executar os testes, execute o seguinte comando:
 
 
     mvn test
