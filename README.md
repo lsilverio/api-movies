@@ -104,13 +104,12 @@ Se preferir, você pode rodar a aplicação dentro de um contêiner Docker:
 
 2. Para se conectar ao banco de dados, não é necessário inserir uma senha.
 
-   
+![Exemplo conexão h2-console](https://github.com/lsilverio/api-movies/blob/master/src/main/resources/static/img/connect_h2_console.png)
+
     Driver Class: org.h2.Driver
     JDBC URL: jdbc:h2:mem:testdb
     User name: sa
     Password:
-
-![Exemplo conexão h2-console](https://github.com/lsilverio/api-movies/blob/master/src/main/resources/static/img/connect_h2_console.png)
 
 ## Testes de Integração
 
