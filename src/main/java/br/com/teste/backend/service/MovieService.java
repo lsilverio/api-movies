@@ -1,5 +1,6 @@
 package br.com.teste.backend.service;
 
+import br.com.teste.backend.dto.MovieWinnerResponseDto;
 import br.com.teste.backend.dto.ProducerResponseDto;
 import br.com.teste.backend.dto.ResponseDto;
 import br.com.teste.backend.entity.Movie;
@@ -22,11 +23,11 @@ public class MovieService {
 
 	/**
 	 * Calcula os intervalos entre os anos dos filmes para cada produtor.
+	 *
 	 * @return Um objeto ResponseDto que contém os produtores com o menor e o maior intervalo.
 	 */
 	public ResponseDto calculateIntervals() {
-
-		List<Movie> movies = movieRepository.findAllByWinnerTrue();
+		List<Movie> movies = getMoviesWinners();
 
 		return buildResponseDto(
 				calculateInterval(movies, false),
@@ -35,6 +36,7 @@ public class MovieService {
 
 	/**
 	 * Constrói um objeto ResponseDto a partir das listas de produtores com menor e maior intervalo.
+	 *
 	 * @param producerWithMinInterval Lista de produtores com menor intervalo.
 	 * @param producerWithMaxInterval Lista de produtores com maior intervalo.
 	 * @return Um objeto ResponseDto.
@@ -48,7 +50,8 @@ public class MovieService {
 
 	/**
 	 * Calcula os intervalos entre os anos dos filmes para cada produtor.
-	 * @param movies Lista de filmes.
+	 *
+	 * @param movies      Lista de filmes.
 	 * @param maxInterval Define se deve calcular o intervalo máximo (true) ou mínimo (false).
 	 * @return Uma lista de objetos ProducerResponseDto com os intervalos calculados.
 	 */
@@ -82,9 +85,10 @@ public class MovieService {
 
 	/**
 	 * Verifica se o intervalo deve ser atualizado com base no tipo de intervalo (maxInterval), intervalo calculado e threshold atual.
-	 * @param maxInterval Define se é um intervalo máximo (true) ou mínimo (false).
-	 * @param interval Intervalo calculado.
-	 * @param intervalThreshold Threshold atual.
+	 *
+	 * @param maxInterval        Define se é um intervalo máximo (true) ou mínimo (false).
+	 * @param interval           Intervalo calculado.
+	 * @param intervalThreshold  Threshold atual.
 	 * @return true se o intervalo deve ser atualizado, caso contrário, false.
 	 */
 	private boolean shouldUpdateInterval(boolean maxInterval, int interval, int intervalThreshold) {
@@ -93,10 +97,11 @@ public class MovieService {
 
 	/**
 	 * Cria um objeto ProducerResponseDto com informações sobre o produtor e o intervalo.
-	 * @param producer Nome do produtor.
-	 * @param interval Intervalo calculado.
-	 * @param previousMovie Filme anterior.
-	 * @param followingMovie Filme seguinte.
+	 *
+	 * @param producer        Nome do produtor.
+	 * @param interval        Intervalo calculado.
+	 * @param previousMovie   Filme anterior.
+	 * @param followingMovie  Filme seguinte.
 	 * @return Um objeto ProducerResponseDto.
 	 */
 	private ProducerResponseDto createProducerResponse(String producer, int interval, Movie previousMovie, Movie followingMovie) {
@@ -109,7 +114,8 @@ public class MovieService {
 	}
 
 	/**
-	 * Agrupa a lista de filmes por produtor em um Map, levando em consideração que o producer esteja envolvido em outro filme juntamente com outro produtor
+	 * Agrupa a lista de filmes por produtor em um Map, levando em consideração que o producer esteja envolvido em outro filme juntamente com outro produtor.
+	 *
 	 * @param movies Lista de filmes.
 	 * @return Um mapa que agrupa os filmes pelo nome do produtor.
 	 */
@@ -122,8 +128,35 @@ public class MovieService {
 				));
 	}
 
+	/**
+	 * Divide os nomes dos produtores se houver mais de um.
+	 *
+	 * @param movie Filme.
+	 * @return Lista de nomes de produtores.
+	 */
 	private List<String> splitProducers(Movie movie) {
 		return Arrays.asList(
 				movie.getProducers().split(" and "));
 	}
+
+	/**
+	 * Obtém a lista de filmes vencedores.
+	 *
+	 * @return Uma lista de objetos MovieWinnerResponseDto.
+	 */
+	private List<Movie> getMoviesWinners() {
+		return movieRepository.findAllByWinnerTrue();
+	}
+
+	/**
+	 * Obtém a lista de filmes vencedores, agrupa-os por produtor e retorna um mapa onde as chaves são nomes de produtores
+	 * e os valores são listas de filmes vencedores associados a cada produtor.
+	 *
+	 * @return Um mapa que associa nomes de produtores a listas de filmes vencedores.
+	 */
+	public Map<String, List<Movie>> groupMoviesWinnersByProducer() {
+		List<Movie> winners = getMoviesWinners();
+		return groupMoviesByProducer(winners);
+	}
+
 }
