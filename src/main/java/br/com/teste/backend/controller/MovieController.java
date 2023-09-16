@@ -1,9 +1,8 @@
 package br.com.teste.backend.controller;
 
-import br.com.teste.backend.dto.MovieWinnerResponseDto;
 import br.com.teste.backend.dto.ResponseDto;
-import br.com.teste.backend.entity.Movie;
 import br.com.teste.backend.service.MovieService;
+import br.com.teste.backend.service.impl.MovieServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,9 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Controlador responsável por lidar com as requisições relacionadas aos filmes e seus prêmios.
@@ -44,21 +40,6 @@ public class MovieController {
     @GetMapping(value = "/prizes")
     public ResponseEntity<ResponseDto> calculateIntervals() {
         return ResponseEntity.ok(movieService.calculateIntervals());
-    }
-
-    /**
-     * Obtém a lista de filmes vencedores e a organiza por produtor.
-     *
-     * @return Um mapa onde as chaves são nomes de produtores e os valores são listas de filmes vencedores associados a cada produtor.
-     */
-    @Operation(summary = "Lista de filmes vencedores por produtor",
-            description = "Retorna a lista de filmes vencedores organizada por produtor.")
-    @ApiResponse(responseCode = "200",
-            description = "Retorna um mapa de produtores e suas listas de filmes vencedores.",
-            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = MovieWinnerResponseDto.class))})
-    @GetMapping("/winners-by-producer")
-    public Map<String, List<Movie>> getWinnersByProducer() {
-        return movieService.groupMoviesWinnersByProducer();
     }
 
 }

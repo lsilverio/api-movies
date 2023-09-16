@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class MovieServiceIntegrationTest {
+public class MovieServiceImplIntegrationTest {
 
     @Autowired
     private MovieService movieService;

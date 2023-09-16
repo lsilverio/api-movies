@@ -6,8 +6,5 @@ public class FileCsvNotFoundException extends RuntimeException {
         super(message);
     }
 
-    public FileCsvNotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }
 
