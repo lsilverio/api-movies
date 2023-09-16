@@ -7,12 +7,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DataInitializationService implements ApplicationRunner {
+public class DataInitialization implements ApplicationRunner {
 
     private final FileService fileService;
 
     @Autowired
-    public DataInitializationService(FileService fileService) {
+    public DataInitialization(FileService fileService) {
         this.fileService = fileService;
     }
 
