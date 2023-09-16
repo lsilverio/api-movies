@@ -29,7 +29,7 @@ public class MovieControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.min[0].interval").value(1))
-                .andExpect(jsonPath("$.max[0].interval").value(9));
+                .andExpect(jsonPath("$.max[0].interval").value(13));
     }
 
 }

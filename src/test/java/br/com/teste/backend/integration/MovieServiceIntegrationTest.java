@@ -28,7 +28,7 @@ public class MovieServiceIntegrationTest {
                 .anyMatch(producerResponseDto -> producerResponseDto.getInterval() == 1);
 
         boolean maxIntervalFound = responseDto.getMax().stream()
-                .anyMatch(producerResponseDto -> producerResponseDto.getInterval() == 9);
+                .anyMatch(producerResponseDto -> producerResponseDto.getInterval() == 13);
 
         // Asserções para verificar se os intervalos foram encontrados no resultado.
         assertEquals(true, minIntervalFound);

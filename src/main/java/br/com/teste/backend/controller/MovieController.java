@@ -51,7 +51,7 @@ public class MovieController {
      *
      * @return Um mapa onde as chaves são nomes de produtores e os valores são listas de filmes vencedores associados a cada produtor.
      */
-    @Operation(summary = "Lista de Filmes Vencedores por Produtor",
+    @Operation(summary = "Lista de filmes vencedores por produtor",
             description = "Retorna a lista de filmes vencedores organizada por produtor.")
     @ApiResponse(responseCode = "200",
             description = "Retorna um mapa de produtores e suas listas de filmes vencedores.",

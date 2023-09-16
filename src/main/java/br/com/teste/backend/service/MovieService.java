@@ -129,14 +129,20 @@ public class MovieService {
 	}
 
 	/**
-	 * Divide os nomes dos produtores se houver mais de um.
+	 * Divide os nomes dos produtores se houver mais de um, considerando vírgulas e " and ".
 	 *
 	 * @param movie Filme.
 	 * @return Lista de nomes de produtores.
 	 */
 	private List<String> splitProducers(Movie movie) {
-		return Arrays.asList(
-				movie.getProducers().split(" and "));
+		List<String> producers = new ArrayList<>();
+		String[] producerNames = movie.getProducers().split(",| and ");
+
+		for (String producer : producerNames) {
+			producers.add(producer.trim());
+		}
+
+		return producers;
 	}
 
 	/**
