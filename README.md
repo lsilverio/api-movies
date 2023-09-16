@@ -1,5 +1,3 @@
-[![Build Status](https://app.travis-ci.com/lsilverio/api-movies.svg?branch=master)](https://app.travis-ci.com/lsilverio/api-movies)
-
 # API Movies
 
 API RESTful que possibilita a leitura da lista de indicados e vencedores
