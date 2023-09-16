@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - openjdk11
+
+# Comandos para construir e testar seu projeto
+script:
+  - mvn clean install
+
+# Notificações por email (opcional)
+notifications:
+  email:
+    recipients:
+      - sdp.silverio@gmail.com
+    on_success: always
+    on_failure: always
