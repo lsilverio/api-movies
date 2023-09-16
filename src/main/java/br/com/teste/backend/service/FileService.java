@@ -31,12 +31,21 @@ public class FileService {
         this.resourceLoader = resourceLoader;
     }
 
+    /**
+     * Carrega dados do arquivo CSV e os salva no repositório de filmes.
+     * @throws IOException se houver um erro durante a leitura ou gravação do arquivo CSV.
+     */
     public void loadDataFromCSV() throws IOException {
         List<String[]> csvData = readCsvData();
         List<Movie> movies = buildMovies(csvData);
         saveMoviesToRepository(movies);
     }
 
+    /**
+     * Obtém o arquivo CSV como um objeto File.
+     * @return O arquivo CSV.
+     * @throws IOException se o arquivo CSV não for encontrado.
+     */
     private File getCsvFile() throws IOException {
         Resource resource = resourceLoader.getResource(CSV_FILE_PATH);
 
@@ -47,6 +56,11 @@ public class FileService {
         return resource.getFile();
     }
 
+    /**
+     * Lê os dados do arquivo CSV e retorna uma lista de arrays de strings representando as linhas do arquivo.
+     * @return Uma lista de arrays de strings contendo os dados do CSV.
+     * @throws IOException se houver um erro durante a leitura do arquivo CSV.
+     */
     private List<String[]> readCsvData() throws IOException {
         Resource resource = new ClassPathResource(CSV_FILE_PATH);
 
@@ -60,12 +74,22 @@ public class FileService {
         }
     }
 
+    /**
+     * Converte os dados do CSV em objetos Movie.
+     * @param csvData Uma lista de arrays de strings representando os dados do CSV.
+     * @return Uma lista de objetos Movie.
+     */
     private List<Movie> buildMovies(List<String[]> csvData) {
         return csvData.stream()
                 .map(this::buildMovie)
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Converte uma linha do CSV em um objeto Movie.
+     * @param fields Um array de strings representando os campos do filme no CSV.
+     * @return Um objeto Movie.
+     */
     private Movie buildMovie(String[] fields) {
         int year = Integer.parseInt(fields[0]);
         String title = fields[1];
@@ -82,6 +106,10 @@ public class FileService {
                 .build();
     }
 
+    /**
+     * Salva a lista de filmes no repositório de filmes.
+     * @param movies Uma lista de objetos Movie a serem salvos.
+     */
     private void saveMoviesToRepository(List<Movie> movies) {
         movieRepository.saveAll(movies);
     }

@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controlador responsável por lidar com as requisições relacionadas aos filmes e seus prêmios.
+ */
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
-	
+
     private final MovieService movieService;
 
     @Autowired
@@ -23,6 +26,11 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+    /**
+     * Retorna informações sobre o produtor com o maior intervalo entre dois prêmios consecutivos e o produtor que obteve dois prêmios mais rapidamente.
+     *
+     * @return Um objeto ResponseEntity contendo as informações dos produtores com seus respectivos intervalos.
+     */
     @Operation(summary = "Intervalo de prêmios",
             description = "Retorna informações sobre o produtor com o maior intervalo entre dois prêmios consecutivos e o produtor que obteve dois prêmios mais rapidamente.")
     @ApiResponse(responseCode = "200",

@@ -7,10 +7,7 @@ import br.com.teste.backend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,30 +20,45 @@ public class MovieService {
 		this.movieRepository = movieRepository;
 	}
 
+	/**
+	 * Calcula os intervalos entre os anos dos filmes para cada produtor.
+	 * @return Um objeto ResponseDto que contém os produtores com o menor e o maior intervalo.
+	 */
 	public ResponseDto calculateIntervals() {
+
 		List<Movie> movies = movieRepository.findAllByWinnerTrue();
+
 		return buildResponseDto(
 				calculateInterval(movies, false),
 				calculateInterval(movies, true));
 	}
 
-	private static ResponseDto buildResponseDto(List<ProducerResponseDto> producerWithMinInterval, List<ProducerResponseDto> producerWithMaxInterval) {
+	/**
+	 * Constrói um objeto ResponseDto a partir das listas de produtores com menor e maior intervalo.
+	 * @param producerWithMinInterval Lista de produtores com menor intervalo.
+	 * @param producerWithMaxInterval Lista de produtores com maior intervalo.
+	 * @return Um objeto ResponseDto.
+	 */
+	private ResponseDto buildResponseDto(List<ProducerResponseDto> producerWithMinInterval, List<ProducerResponseDto> producerWithMaxInterval) {
 		return ResponseDto.builder()
 				.min(producerWithMinInterval)
 				.max(producerWithMaxInterval)
 				.build();
 	}
 
+	/**
+	 * Calcula os intervalos entre os anos dos filmes para cada produtor.
+	 * @param movies Lista de filmes.
+	 * @param maxInterval Define se deve calcular o intervalo máximo (true) ou mínimo (false).
+	 * @return Uma lista de objetos ProducerResponseDto com os intervalos calculados.
+	 */
 	private List<ProducerResponseDto> calculateInterval(List<Movie> movies, boolean maxInterval) {
-
 		Map<String, List<Movie>> moviesByProducer = groupMoviesByProducer(movies);
 		List<ProducerResponseDto> response = new ArrayList<>();
 		int intervalThreshold = maxInterval ? -1 : Integer.MAX_VALUE;
 
 		for (Map.Entry<String, List<Movie>> entry : moviesByProducer.entrySet()) {
-
 			List<Movie> relevantMovies = entry.getValue();
-
 			if (relevantMovies.size() >= 2) {
 				relevantMovies.sort(Comparator.comparingInt(Movie::getYearMovie));
 
@@ -56,7 +68,8 @@ public class MovieService {
 					if (shouldUpdateInterval(maxInterval, interval, intervalThreshold)) {
 						intervalThreshold = interval;
 						ProducerResponseDto producerResponseDto = createProducerResponse(entry.getKey(), interval, relevantMovies.get(i - 1), relevantMovies.get(i));
-						updateResponseList(response, producerResponseDto);
+						response.clear(); // Limpar a lista para adicionar apenas o produtor com menor/maior intervalo
+						response.add(producerResponseDto);
 					} else if (interval == intervalThreshold) {
 						ProducerResponseDto producerResponseDto = createProducerResponse(entry.getKey(), interval, relevantMovies.get(i - 1), relevantMovies.get(i));
 						response.add(producerResponseDto);
@@ -67,26 +80,50 @@ public class MovieService {
 		return response;
 	}
 
+	/**
+	 * Verifica se o intervalo deve ser atualizado com base no tipo de intervalo (maxInterval), intervalo calculado e threshold atual.
+	 * @param maxInterval Define se é um intervalo máximo (true) ou mínimo (false).
+	 * @param interval Intervalo calculado.
+	 * @param intervalThreshold Threshold atual.
+	 * @return true se o intervalo deve ser atualizado, caso contrário, false.
+	 */
 	private boolean shouldUpdateInterval(boolean maxInterval, int interval, int intervalThreshold) {
 		return (maxInterval && interval > intervalThreshold) || (!maxInterval && interval < intervalThreshold);
 	}
 
-	private void updateResponseList(List<ProducerResponseDto> response, ProducerResponseDto producerResponseDto) {
-		response.clear();
-		response.add(producerResponseDto);
-	}
-
+	/**
+	 * Cria um objeto ProducerResponseDto com informações sobre o produtor e o intervalo.
+	 * @param producer Nome do produtor.
+	 * @param interval Intervalo calculado.
+	 * @param previousMovie Filme anterior.
+	 * @param followingMovie Filme seguinte.
+	 * @return Um objeto ProducerResponseDto.
+	 */
 	private ProducerResponseDto createProducerResponse(String producer, int interval, Movie previousMovie, Movie followingMovie) {
-		ProducerResponseDto producerResponseDto = new ProducerResponseDto();
-		producerResponseDto.setProducer(producer);
-		producerResponseDto.setInterval(interval);
-		producerResponseDto.setPreviousWin(previousMovie.getYearMovie());
-		producerResponseDto.setFollowingWin(followingMovie.getYearMovie());
-		return producerResponseDto;
+		return ProducerResponseDto.builder()
+				.producer(producer)
+				.interval(interval)
+				.previousWin(previousMovie.getYearMovie())
+				.followingWin(followingMovie.getYearMovie())
+				.build();
 	}
 
-	private static Map<String, List<Movie>> groupMoviesByProducer(List<Movie> movies) {
-		movies.sort(Comparator.comparing(Movie::getProducers));
-		return movies.stream().collect(Collectors.groupingBy(Movie::getProducers));
+	/**
+	 * Agrupa a lista de filmes por produtor em um Map, levando em consideração que o producer esteja envolvido em outro filme juntamente com outro produtor
+	 * @param movies Lista de filmes.
+	 * @return Um mapa que agrupa os filmes pelo nome do produtor.
+	 */
+	private Map<String, List<Movie>> groupMoviesByProducer(List<Movie> movies) {
+		return movies.stream()
+				.flatMap(movie -> splitProducers(movie).stream().map(producer -> new AbstractMap.SimpleEntry<>(producer, movie)))
+				.collect(Collectors.groupingBy(
+						AbstractMap.SimpleEntry::getKey,
+						Collectors.mapping(AbstractMap.SimpleEntry::getValue, Collectors.toList())
+				));
+	}
+
+	private List<String> splitProducers(Movie movie) {
+		return Arrays.asList(
+				movie.getProducers().split(" and "));
 	}
 }
